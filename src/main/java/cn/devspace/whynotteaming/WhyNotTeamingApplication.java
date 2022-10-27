@@ -1,5 +1,6 @@
 package cn.devspace.whynotteaming;
 
+import cn.devspace.whynotteaming.Lang.LangBase;
 import cn.devspace.whynotteaming.Server.Server;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,11 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WhyNotTeamingApplication {
 //入口类
     public static void main(String[] args) {
+        //init SpringBoot
         SpringApplication.run(WhyNotTeamingApplication.class, args);
         //init Server
         Server initServer = new Server();
-        String author = Server.getAuthor();
-        System.out.print(author);
+        //init Lang
+        LangBase initLang = new LangBase();
+
     }
 
 }
