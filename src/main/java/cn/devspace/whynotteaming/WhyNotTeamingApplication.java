@@ -11,12 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WhyNotTeamingApplication {
 //入口类
     public static void main(String[] args) {
-        LangBase initLang = new LangBase();
+        //init Server
+        Server server = new Server();
 
-        MessageBase message = new MessageBase();
-        String author = Server.getAuthor();
-        author = message.BaseFormat(MessageBase.METHOD_LOG,author);
-        System.out.print(author);
 
         //init
         SpringApplication.run(WhyNotTeamingApplication.class, args);
