@@ -1,7 +1,7 @@
 package cn.devspace.whynotteaming.Server;
 
 import cn.devspace.whynotteaming.Lang.LangBase;
-import cn.devspace.whynotteaming.Message.MessageBase;
+import cn.devspace.whynotteaming.Message.Log;
 
 public class Server {
 
@@ -13,13 +13,10 @@ public class Server {
     public Server(){
         //init LangLIB
         this.lang = new LangBase();
-        //init MessageBase
-        MessageBase message = new MessageBase();
         String test = getLanguage().TranslateOne("Test.Test","hello");
         String author = Server.getAuthor();
-        author = message.BaseFormat(MessageBase.METHOD_LOG,author);
-        System.out.print(author);
-        System.out.print(test);
+        Log.sendLog(author);
+        Log.sendWarn(test);
     }
 
 
