@@ -46,7 +46,7 @@ public class LangBase {
      * @param Level
      * @return
      */
-    public String  TranslateOne(String key,String param, int Level){
+    public String TranslateOne(String key,String param, int Level){
         return this.TranslateOne(key,new String[]{param},null);
     }
 

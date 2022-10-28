@@ -1,9 +1,13 @@
 package cn.devspace.whynotteaming.Server;
 
 import cn.devspace.whynotteaming.Lang.LangBase;
+import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Message.Log;
+import cn.devspace.whynotteaming.Router;
 
-public class Server {
+import java.io.FileNotFoundException;
+
+public class Server extends ManagerBase {
 
     public static final String VERSION = "0.0.1-alpha";
     public static final String AUTHOR = "Pama Lee";
