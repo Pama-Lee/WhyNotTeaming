@@ -7,5 +7,7 @@ public interface Message {
     void sendLog();
     void sendMessage();
 
-    String Format(String Message, int[] Color);
+    static String Format(String Message, int[] Color) {
+        return null;
+    }
 }

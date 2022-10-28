@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * 多语言基础
+ */
 public class LangBase {
 
     protected Map<String,String> lang;
@@ -19,6 +22,12 @@ public class LangBase {
         return this.TranslateOne(key,Objects.requireNonNullElse(params, EmptyArrays.EMPTY_STRINGS),null);
     }
 
+    /**
+     * 接收Object类型参数
+     * @param key
+     * @param params
+     * @return
+     */
     protected String TranslateOne(String key,Object... params){
         if (params != null){
             String[] paramsToSting = new String[params.length];
@@ -30,7 +39,14 @@ public class LangBase {
         return this.TranslateOne(key,EmptyArrays.EMPTY_STRINGS,null);
     }
 
-    public String  TranslateOne(String key,String param, int Level){
+    /**
+     * 带单字符串性翻译
+     * @param key
+     * @param param
+     * @param Level
+     * @return
+     */
+    public String TranslateOne(String key,String param, int Level){
         return this.TranslateOne(key,new String[]{param},null);
     }
 
