@@ -2,10 +2,8 @@ package cn.devspace.whynotteaming.Server;
 
 import cn.devspace.whynotteaming.Lang.LangBase;
 import cn.devspace.whynotteaming.Manager.ManagerBase;
+import cn.devspace.whynotteaming.Manager.SettingManager;
 import cn.devspace.whynotteaming.Message.Log;
-import cn.devspace.whynotteaming.Router;
-
-import java.io.FileNotFoundException;
 
 public class Server extends ManagerBase {
 
@@ -13,9 +11,13 @@ public class Server extends ManagerBase {
     public static final String AUTHOR = "Pama Lee";
 
     public LangBase lang;
+    public SettingManager settingManager;
+
+    public String Language;
 
     public Server(){
-        //init LangLIB
+        this.settingManager = new SettingManager();
+        //初始化多语言
         this.lang = new LangBase();
         String test = getLanguage().TranslateOne("Test.Test","hello");
         String author = Server.getAuthor();
@@ -28,6 +30,10 @@ public class Server extends ManagerBase {
         return this.lang;
     }
 
+    public String getLangSet(){
+        return this.Language;
+    }
+
     public static String getServerVersion(){
         return VERSION;
     }
@@ -36,4 +42,7 @@ public class Server extends ManagerBase {
         return AUTHOR;
     }
 
+    public static void Shutdown(int Code){
+        System.exit(Code);
+    }
 }
