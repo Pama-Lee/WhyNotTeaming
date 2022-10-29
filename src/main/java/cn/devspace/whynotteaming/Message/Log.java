@@ -1,5 +1,7 @@
 package cn.devspace.whynotteaming.Message;
 
+import cn.devspace.whynotteaming.Server.Server;
+
 public class Log extends MessageBase{
 
 
@@ -11,12 +13,19 @@ public class Log extends MessageBase{
         System.out.print(BaseFormat(METHOD_WARN,Message));
     }
 
+    public static void sendError(String Message,int Code){
+        System.out.print(BaseFormat(METHOD_ERROR,Message));
+        Server.Shutdown(Code);
+    }
+
     public static String BaseFormat(String METHOD,String Message){
         String Prefix = switch (METHOD) {
-            case "LOG" -> Format(PREFIX_LOG, BLUE_COLOR)+Format(PREFIX,WHITE_COLOR)+"\t";
-            case "WARN" -> Format(PREFIX_WARN, RED_COLOR)+Format(PREFIX,WHITE_COLOR)+"\t";
+            case "LOG" -> Format(PREFIX_LOG, BLUE_COLOR)+Format(PREFIX,WHITE_COLOR);
+            case "WARN" -> Format(PREFIX_WARN, RED_COLOR)+Format(PREFIX,WHITE_COLOR);
+            case "ERROR" -> Format(PREFIX_ERROR, RED_COLOR)+Format(PREFIX,RED_COLOR);
             default -> null;
         };
-        return Prefix+Message+"\n";
+        return Prefix+"\t"+Format(Message,WHITE_COLOR)+"\n";
+
     }
 }

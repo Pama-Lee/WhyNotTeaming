@@ -1,6 +1,8 @@
 package cn.devspace.whynotteaming.Lang;
 
+import cn.devspace.whynotteaming.Message.Log;
 import io.netty.util.internal.EmptyArrays;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -15,9 +17,26 @@ public class LangBase {
 
     protected Map<String,String> lang;
 
+    private String Language;
+
     public LangBase(){
-        this.lang = loadLangFile("chs");
+        String Language = getLanguage();
+        this.Language = Language;
+        this.lang = loadLangFile(Language);
     }
+
+    private String getLanguage(){
+        try {
+            Yaml yaml = new Yaml();
+            BufferedReader br = new BufferedReader(new FileReader(this.getClass().getResource("/whynotteaming.yml").getPath().substring(1)));
+            Map<String,String> Map = yaml.loadAs(br,Map.class);
+            return Map.get("app.language");
+        }catch (FileNotFoundException e){
+            Log.sendError("The Setting File [whynotteaming.yml] Not Found!",-1);
+            return null;
+        }
+    }
+
     public String TranslateOne(String key, String... params){
         return this.TranslateOne(key,Objects.requireNonNullElse(params, EmptyArrays.EMPTY_STRINGS),null);
     }
@@ -78,7 +97,7 @@ public class LangBase {
     }
 
     protected String getValue(String key){
-        if (this.lang.get(key) != null){
+        if (this.lang != null && this.lang.get(key) != null){
             return this.lang.get(key);
         }
         return null;
@@ -95,7 +114,10 @@ public class LangBase {
             BufferedReader Reader = new BufferedReader(langStreamReader);
             return parasLang(Reader);
         }catch (IOException e){
-            System.out.print(e.toString());
+            Log.sendError("The Language ["+Language+".ini] File cannot open!",778);
+            return null;
+        }catch (NullPointerException ne){
+            Log.sendError("The Language ["+Language+"] Not Found! Please check your setting in [whynotteaming.yml]",777);
             return null;
         }
 

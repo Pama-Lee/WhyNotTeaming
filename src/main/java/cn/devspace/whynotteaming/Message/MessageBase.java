@@ -17,9 +17,11 @@ public class MessageBase implements Message{
 
     public final static String METHOD_LOG = "LOG";
     public final static String METHOD_WARN = "WARN";
+    public final static String METHOD_ERROR = "ERROR";
     protected final static String PREFIX = "WhyNotTeaming----->>";
     protected final static String PREFIX_LOG = "<<INFO>>";
     protected final static String PREFIX_WARN = "<<!>>";
+    protected final static String PREFIX_ERROR = "<ERROR>";
 
     @Override
     public void sendLog(){

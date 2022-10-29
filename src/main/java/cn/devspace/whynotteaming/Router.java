@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-public class Router extends RouteManager {
+public class Router extends RouteManager{
 
 
     public String route;
@@ -35,17 +35,14 @@ public class Router extends RouteManager {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-
         Map<String, ArrayList<String>> Yaml = yaml.loadAs(bf,Map.class);
-
         this.RouteMap = Yaml;
     }
-
 
     public String start(String route, String method){
         if (!getRoute(route) || !getMethod(method)){
             Log.sendWarn(this.lang.TranslateOne("Route.Error",route,method));
-            return ResponseString(1,0,"路由错误");
+            return ResponseString(1,0,TranslateOne("Route.Error.User",route));
         }
 
         return null;

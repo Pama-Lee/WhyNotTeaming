@@ -19,8 +19,6 @@ public class WhyNotTeamingApplication {
     public static void main(String[] args) {
         //init Server
         Server server = new Server();
-
-
         //init
         SpringApplication.run(WhyNotTeamingApplication.class, args);
 
