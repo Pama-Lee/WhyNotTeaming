@@ -2,6 +2,7 @@ package cn.devspace.whynotteaming.Lang;
 
 import cn.devspace.whynotteaming.Message.Log;
 import io.netty.util.internal.EmptyArrays;
+import org.springframework.core.io.ClassPathResource;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
@@ -28,7 +29,7 @@ public class LangBase {
     public String getLanguage(){
         try {
             Yaml yaml = new Yaml();
-            BufferedReader br = new BufferedReader(new FileReader(this.getClass().getResource("/whynotteaming.yml").getPath()));
+            BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+"/resources/whynotteaming.yml"));
             Map<String,String> Map = yaml.loadAs(br,Map.class);
             return Map.get("app.language");
         }catch (FileNotFoundException e){
@@ -109,8 +110,9 @@ public class LangBase {
     }
 
     private Map<String,String> loadLangFile(String Language){
-        try(InputStream langStream = this.getClass().getResourceAsStream("/language/"+Language+".ini")){
-            InputStreamReader langStreamReader = new InputStreamReader(langStream, StandardCharsets.UTF_8);
+
+        try(InputStream langStream = new ClassPathResource("Language/"+Language+".ini").getInputStream()){
+            InputStreamReader langStreamReader = new InputStreamReader(langStream);
             BufferedReader Reader = new BufferedReader(langStreamReader);
             return parasLang(Reader);
         }catch (IOException e){

@@ -6,8 +6,9 @@ import java.util.Map;
 
 public class SettingManager extends ManagerBase{
 
+
     public String getSetting(String key){
-        Map<String,String> Map = super.getSingeYaml(this.getClass().getResource("/whynotteaming.yml").getPath().substring(1));
+        Map<String,String> Map = super.getSingeYaml(System.getProperty("user.dir")+"/resources/whynotteaming.yml");
        return Map.get(key);
     }
 

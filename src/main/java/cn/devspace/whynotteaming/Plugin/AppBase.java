@@ -1,4 +1,5 @@
 package cn.devspace.whynotteaming.Plugin;
 
-public class AppBase extends PluginBase{
+abstract public class AppBase extends PluginBase{
+
 }
