@@ -25,10 +25,10 @@ public class LangBase {
         this.lang = loadLangFile(Language);
     }
 
-    private String getLanguage(){
+    public String getLanguage(){
         try {
             Yaml yaml = new Yaml();
-            BufferedReader br = new BufferedReader(new FileReader(this.getClass().getResource("/whynotteaming.yml").getPath().substring(1)));
+            BufferedReader br = new BufferedReader(new FileReader(this.getClass().getResource("/whynotteaming.yml").getPath()));
             Map<String,String> Map = yaml.loadAs(br,Map.class);
             return Map.get("app.language");
         }catch (FileNotFoundException e){
