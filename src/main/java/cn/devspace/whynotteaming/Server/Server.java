@@ -5,15 +5,14 @@ import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Manager.SettingManager;
 import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Plugin.AppBase;
-import cn.devspace.whynotteaming.Plugin.AppLoader;
 import cn.devspace.whynotteaming.Plugin.PluginBase;
-import com.aio.util.FreeMarkerUtil;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.*;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Server extends ManagerBase {
@@ -38,6 +37,7 @@ public class Server extends ManagerBase {
 
     public Map<String, PluginBase> pluginList;
     public Map<String, AppBase> AppList;
+    public Map<String, Object> AppClass = new HashMap<>();
     private static Runtime runtime = Runtime.getRuntime();
 
     public Server(){
@@ -80,8 +80,8 @@ public class Server extends ManagerBase {
         Log.sendLog(TranslateOne("App.Licence"));
         Log.sendLog(TranslateOne("App.Run.UseMemory",getUsedMemory()));
         Log.sendLog(AppPath);
+        AppBase.loadApps(this);
 
-        new AppLoader(this);
 
     }
 

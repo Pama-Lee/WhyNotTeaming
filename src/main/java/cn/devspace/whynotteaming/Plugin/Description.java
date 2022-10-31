@@ -2,6 +2,7 @@ package cn.devspace.whynotteaming.Plugin;
 
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.InputStream;
 import java.util.Map;
 
 public class Description {
@@ -15,6 +16,10 @@ public class Description {
     public Description(String YamlString){
         Yaml yml = new Yaml();
         this.LoadMap(yml.loadAs(YamlString, Map.class));
+    }
+    public Description(InputStream YamlInputStream){
+        Yaml yml = new Yaml();
+        this.LoadMap(yml.loadAs(YamlInputStream, Map.class));
     }
 
     public void LoadMap(Map<String,Object> map){

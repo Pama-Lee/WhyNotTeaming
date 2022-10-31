@@ -1,5 +1,5 @@
 AppName: Login
 Author: Pama Lee
 Version: 1.0.0
-Main: Login
+Main: cn.devspace.whynotteaming.App.Login.Login
 Description: 这是一个Login「APP」
