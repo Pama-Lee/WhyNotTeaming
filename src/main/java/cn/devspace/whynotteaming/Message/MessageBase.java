@@ -16,10 +16,12 @@ public class MessageBase implements Message{
     public final static int[] BLUE_COLOR = {153,204,255};
 
     public final static String METHOD_LOG = "LOG";
+    public final static String METHOD_APP = "APP";
     public final static String METHOD_WARN = "WARN";
     public final static String METHOD_ERROR = "ERROR";
     protected final static String PREFIX = "WhyNotTeaming----->>";
     protected final static String PREFIX_LOG = "<<INFO>>";
+    protected final static String PREFIX_APP = "「APP」";
     protected final static String PREFIX_WARN = "<<!>>";
     protected final static String PREFIX_ERROR = "<ERROR>";
 

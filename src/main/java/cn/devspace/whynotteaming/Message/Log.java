@@ -5,6 +5,10 @@ import cn.devspace.whynotteaming.Server.Server;
 public class Log extends MessageBase{
 
 
+    public static void AppStart(String AppName){
+        System.out.print(BaseFormat(METHOD_APP,AppName));
+    }
+
     public static void sendLog(String Message){
         System.out.print(BaseFormat(METHOD_LOG,Message));
     }
@@ -21,6 +25,7 @@ public class Log extends MessageBase{
     public static String BaseFormat(String METHOD,String Message){
         String Prefix = switch (METHOD) {
             case "LOG" -> Format(PREFIX_LOG, BLUE_COLOR)+Format(PREFIX,WHITE_COLOR);
+            case "APP" -> Format(PREFIX_APP, GREEN_COLOR)+Format(PREFIX,WHITE_COLOR);
             case "WARN" -> Format(PREFIX_WARN, RED_COLOR)+Format(PREFIX,WHITE_COLOR);
             case "ERROR" -> Format(PREFIX_ERROR, RED_COLOR)+Format(PREFIX,RED_COLOR);
             default -> null;
