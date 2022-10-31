@@ -8,7 +8,9 @@ import cn.devspace.whynotteaming.Plugin.AppBase;
 import cn.devspace.whynotteaming.Plugin.PluginBase;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,9 +25,9 @@ public class Server extends ManagerBase {
     public static final String NAME = "WhyNotTeaming(JAVA)";
 
     public final URL ROOT = this.getClass().getResource("/");
-    public String classPath = new File(this.getClass().getResource("").getPath()).getPath()+"/";
-    public String AppPath = classPath.replace("Server","App")+"/";
-    public String RunPath = System.getProperty("user.dir")+"/";
+    public String classPath = new File(this.getClass().getResource("").getPath()).getPath() + "/";
+    public String AppPath = classPath.replace("Server", "App") + "/";
+    public static String RunPath = System.getProperty("user.dir")+"/";
     public LangBase lang;
     public SettingManager settingManager;
 
@@ -37,92 +39,90 @@ public class Server extends ManagerBase {
 
     public Map<String, PluginBase> pluginList;
     public Map<String, AppBase> AppList;
-    public Map<String, Object> AppClass = new HashMap<>();
+    public static Map<String, AppBase> AppClass = new HashMap<>();
     private static Runtime runtime = Runtime.getRuntime();
 
-    public Server(){
+    public Server() {
+
+        Log.sendLog(RunPath);
+        init();
         //初始化多语言
         this.lang = new LangBase();
         this.Language = this.lang.getLanguage();
-        init();
-       this.settingManager = new SettingManager();
+        this.settingManager = new SettingManager();
 
         currentThread = Thread.currentThread();
         Instance = this;
     }
 
-    public void init(){
-        if (!new File(RunPath+"resources/").exists()){
-            try{
+    public static void init() {
+        if (!new File(RunPath + "resources/").exists()) {
+            try {
                 InputStream set = new ClassPathResource("whynotteaming.yml").getInputStream();
                 InputStream route = new ClassPathResource("route.yml").getInputStream();
-
-                new File(RunPath+"resources/").mkdirs();
+                Log.sendLog(RunPath);
+                new File(RunPath + "resources/").mkdirs();
                 Files.copy(set, Path.of(RunPath + "resources/whynotteaming.yml"));
                 Files.copy(route, Path.of(RunPath + "resources/route.yml"));
 
-                Log.sendError("The configuration file is ready, please reopen the program",200);
-            }catch (IOException e){
-                Log.sendError(e.toString(),1);
+                Log.sendError("The configuration file is ready, please reopen the program", 200);
+            } catch (IOException e) {
+                Log.sendError(e.toString(), 1);
             }
 
         }
     }
 
 
-    public void Start(){
+    public void Start() {
         //服务器开启
 
         //处理语言
-        Log.sendLog(TranslateOne("Language.Use",this.Language));
-        Log.sendLog(TranslateOne("App.Name",getName(),getServerVersion()));
-        Log.sendLog(TranslateOne("App.Version",getServerVersion()));
+        Log.sendLog(TranslateOne("Language.Use", this.Language));
+        Log.sendLog(TranslateOne("App.Name", getName(), getServerVersion()));
+        Log.sendLog(TranslateOne("App.Version", getServerVersion()));
         Log.sendLog(TranslateOne("App.Licence"));
-        Log.sendLog(TranslateOne("App.Run.UseMemory",getUsedMemory()));
-        Log.sendLog(AppPath);
         AppBase.loadApps(this);
-
-
+        Log.sendLog(TranslateOne("App.Run.UseMemory", getUsedMemory()));
     }
 
 
-    public static<T> boolean isStartupFromJar(Class<T> clazz) {
+    public static <T> boolean isStartupFromJar(Class<T> clazz) {
         File file = new File(clazz.getProtectionDomain().getCodeSource().getLocation().getPath());
         return file.isFile();
     }
 
 
-
-    public static double getUsedMemory(){
-        String res = String.format("%.2f",(double)runtime.totalMemory() / 1024 / 1024 - (double) runtime.freeMemory() / 1024 / 1024);
+    public static double getUsedMemory() {
+        String res = String.format("%.2f", (double) runtime.totalMemory() / 1024 / 1024 - (double) runtime.freeMemory() / 1024 / 1024);
         return Double.parseDouble(res);
     }
 
-    public static Server getInstance(){
+    public static Server getInstance() {
         return Instance;
     }
 
-    public LangBase getLanguages(){
+    public LangBase getLanguages() {
         return this.lang;
     }
 
-    public String getLangSet(){
+    public String getLangSet() {
         return this.Language;
     }
 
-    public static String getServerVersion(){
+    public static String getServerVersion() {
         return VERSION;
     }
 
-    public static String getAuthor(){
+    public static String getAuthor() {
         return AUTHOR;
     }
 
-    public static void Shutdown(int Code){
+    public static void Shutdown(int Code) {
         System.exit(Code);
     }
 
-    public static String getName(){
+    public static String getName() {
         return NAME;
     }
 }
