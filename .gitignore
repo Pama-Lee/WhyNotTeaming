@@ -3,8 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-.out
-.resources
+out/
 ### STS ###
 .apt_generated
 .classpath
@@ -32,5 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
-.resources/
+resources/
 .DS_Store

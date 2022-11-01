@@ -38,6 +38,8 @@ public class Router extends RouteManager {
             Log.sendWarn(this.lang.TranslateOne("Route.Error", route, method));
             return ResponseString(1, 0, TranslateOne("Route.Error.User", route));
         }else {
+            System.out.println(Server.AppClass.keySet());
+            System.out.println(route);
             AppBase al = Server.AppClass.get(route);
             return al.onCall(route,method);
             //return ResponseString(200,1,TranslateOne("Route.Success",route));

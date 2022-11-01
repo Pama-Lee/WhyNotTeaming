@@ -38,13 +38,11 @@ public class Server extends ManagerBase {
     protected static Thread currentThread;
 
     public Map<String, PluginBase> pluginList;
-    public Map<String, AppBase> AppList;
+    public Map<String, AppBase> AppList = new HashMap<>();
     public static Map<String, AppBase> AppClass = new HashMap<>();
     private static Runtime runtime = Runtime.getRuntime();
 
     public Server() {
-
-        Log.sendLog(RunPath);
         init();
         //初始化多语言
         this.lang = new LangBase();
@@ -82,7 +80,9 @@ public class Server extends ManagerBase {
         Log.sendLog(TranslateOne("App.Name", getName(), getServerVersion()));
         Log.sendLog(TranslateOne("App.Version", getServerVersion()));
         Log.sendLog(TranslateOne("App.Licence"));
+
         AppBase.loadApps(this);
+
         Log.sendLog(TranslateOne("App.Run.UseMemory", getUsedMemory()));
     }
 
