@@ -1,4 +1,8 @@
 package cn.devspace.whynotteaming.Plugin;
 
-public class PluginBase {
+import cn.devspace.whynotteaming.Manager.ManagerBase;
+
+abstract public class PluginBase extends ManagerBase {
+
+
 }
