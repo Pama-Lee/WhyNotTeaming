@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class Request {
 
     @GetMapping("/{route}/{method}")
-    public String Requests(@PathVariable("route") String route, @PathVariable("method") String method){
-        return new Router(route,method).start(route,method);
+    public String Requests(@PathVariable("route") String route, @PathVariable("method") String method) {
+        return new Router(route, method).start(route, method);
     }
 
 }

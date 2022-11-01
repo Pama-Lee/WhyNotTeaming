@@ -13,17 +13,18 @@ public class Description {
     private String main;
     private String description;
 
-    public Description(String YamlString){
+    public Description(String YamlString) {
         Yaml yml = new Yaml();
         this.LoadMap(yml.loadAs(YamlString, Map.class));
     }
-    public Description(InputStream YamlInputStream){
+
+    public Description(InputStream YamlInputStream) {
         Yaml yml = new Yaml();
         this.LoadMap(yml.loadAs(YamlInputStream, Map.class));
     }
 
-    public void LoadMap(Map<String,Object> map){
-        if (map != null){
+    public void LoadMap(Map<String, Object> map) {
+        if (map != null) {
             this.name = (String) map.get("Name");
             this.author = (String) map.get("Author");
             this.version = (String) map.get("Version");
@@ -33,23 +34,23 @@ public class Description {
         }
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public String getAuthor(){
+    public String getAuthor() {
         return this.author;
     }
 
-    public String getVersion(){
+    public String getVersion() {
         return this.version;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public String getMain(){
+    public String getMain() {
         return this.main;
     }
 
