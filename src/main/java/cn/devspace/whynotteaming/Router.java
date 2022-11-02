@@ -28,19 +28,17 @@ public class Router extends RouteManager {
     public Router(String route, String method) {
         this.route = route;
         this.method = method;
-        this.lang = new LangBase();
+        this.lang = Server.getInstance().getLanguages();
 
         this.RouteMap = getRouteMap();
     }
 
     public String start(String route, String method) {
-        if (!getRoute(route) || !getMethod(method)) {
+        if (!getRoute(route)) {
             Log.sendWarn(this.lang.TranslateOne("Route.Error", route, method));
             return ResponseString(1, 0, TranslateOne("Route.Error.User", route));
         }else {
-            System.out.println(Server.AppClass.keySet());
-            System.out.println(route);
-            AppBase al = Server.AppClass.get(route);
+            AppBase al = Server.AppList.get(route);
             return al.onCall(route,method);
             //return ResponseString(200,1,TranslateOne("Route.Success",route));
         }

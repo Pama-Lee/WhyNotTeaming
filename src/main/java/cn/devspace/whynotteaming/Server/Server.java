@@ -38,7 +38,8 @@ public class Server extends ManagerBase {
     protected static Thread currentThread;
 
     public Map<String, PluginBase> pluginList;
-    public Map<String, AppBase> AppList = new HashMap<>();
+    public static Map<String, AppBase> AppList = new HashMap<>();
+
     public static Map<String, AppBase> AppClass = new HashMap<>();
     private static Runtime runtime = Runtime.getRuntime();
 
@@ -84,6 +85,15 @@ public class Server extends ManagerBase {
         AppBase.loadApps(this);
 
         Log.sendLog(TranslateOne("App.Run.UseMemory", getUsedMemory()));
+        enableApp();
+
+    }
+
+    private void enableApp(){
+        for(String app:this.AppList.keySet()){
+            AppBase appClass = this.AppList.get(app);
+            appClass.onEnable();
+        }
     }
 
 

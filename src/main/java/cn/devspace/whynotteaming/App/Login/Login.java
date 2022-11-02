@@ -1,11 +1,20 @@
 package cn.devspace.whynotteaming.App.Login;
 
+import cn.devspace.whynotteaming.Lang.LangBase;
 import cn.devspace.whynotteaming.Plugin.AppBase;
 
 public class Login extends AppBase {
-    public void onLoad() {
 
-        sendLog("hello");
+    private LangBase lang;
+    public void onLoad() {
+        this.lang = loadLanguage();
+        sendLog("On Loading!!");
+    }
+
+    public void onEnable(){
+        sendLog("on Enable!!");
+       String f2 =  this.lang.Translate("Test","成功！！");
+       sendLog(f2);
     }
 
     public String onCall(String route,String method){
