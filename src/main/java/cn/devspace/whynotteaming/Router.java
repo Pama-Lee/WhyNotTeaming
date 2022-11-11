@@ -33,12 +33,31 @@ public class Router extends RouteManager {
         this.RouteMap = getRouteMap();
     }
 
+    //开启路由分发
     public String start(String route, String method) {
+        return getStart(route, method,null);
+    }
+
+    //携带请求体的路由分发
+    public String start(String route, String method, Map<String,String> Request){
+        if (Request.isEmpty()){
+            Log.sendLog(this.RouteMap.toString());
+            Log.sendWarn(this.lang.TranslateOne("Route.Error", route, method));
+            return ResponseString(1, 0, TranslateOne("Route.Error.User", route));
+        }else {
+            return getStart(route, method,Request);
+        }
+    }
+
+   //匹配路由和方法
+    private String getStart(String route, String method, Map<String,String> Req) {
         if (!getRoute(route)) {
+            Log.sendLog(this.RouteMap.toString());
             Log.sendWarn(this.lang.TranslateOne("Route.Error", route, method));
             return ResponseString(1, 0, TranslateOne("Route.Error.User", route));
         }else {
             AppBase al = Server.AppList.get(route);
+            if (Req!=null && !Req.isEmpty()) return al.onCall(route,method,Req);
             return al.onCall(route,method);
             //return ResponseString(200,1,TranslateOne("Route.Success",route));
         }

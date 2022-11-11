@@ -8,3 +8,6 @@ Test:
 Login:
   - LoginBase
   - Login
+
+Register:
+  - LoginMethod

@@ -3,6 +3,8 @@ package cn.devspace.whynotteaming.App.Login;
 import cn.devspace.whynotteaming.Lang.LangBase;
 import cn.devspace.whynotteaming.Plugin.AppBase;
 
+import java.util.Map;
+
 public class Login extends AppBase {
 
     private LangBase lang;
@@ -17,8 +19,12 @@ public class Login extends AppBase {
        sendLog(f2);
     }
 
-    public String onCall(String route,String method){
-        sendLog("A visit From "+method);
+    //REQ得到请求中的头文件
+    @Override
+    public String onCall(String route, String method, Map<String,String> Req){
+        sendLog("A visit From "+method+"\t"+Req.toString());
         return ResponseString(200,1,"A visit From "+method);
     }
+
+
 }

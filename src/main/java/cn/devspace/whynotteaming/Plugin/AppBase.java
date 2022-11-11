@@ -2,11 +2,11 @@ package cn.devspace.whynotteaming.Plugin;
 
 
 import cn.devspace.whynotteaming.Lang.LangBase;
+import cn.devspace.whynotteaming.Manager.DataManager;
 import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Server.Server;
 import org.springframework.core.io.ClassPathResource;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -21,6 +21,7 @@ abstract public class AppBase extends ManagerBase {
     protected String callback = null;
     protected static String LoadingApp = null;
     protected static LangBase AppLang=null;
+    protected Description description;
 
     protected String AppName;
 
@@ -35,10 +36,28 @@ abstract public class AppBase extends ManagerBase {
 
     }
 
+    public void RouteRegister(){
+
+    }
+
     public String onCall(String route,String method){
         return null;
     }
 
+    public String onCall(String route, String method, Map<String,String> Request){
+        return null;
+    }
+
+
+    protected DataManager getDataManager(){
+       if (description.getDataBase() == null ){
+           // TODO: 应当给出提示
+           return null;
+       }else{
+          // return new DataManager();
+       }
+       return null;
+    }
 
 
     protected void sendLog(String log){
@@ -56,12 +75,13 @@ try {
             String main = appDes.getMain();
                 Class<?> c = Class.forName(main);
                 AppBase app = (AppBase) c.getDeclaredConstructor().newInstance();
+                app.setDescription(appDes);
                 Log.AppStart(Server.getInstance().Translators("App.Start",apps));
                 app.localApp(apps);
                 //开始执行onload
                 app.onLoad();
                 Log.AppStart(Server.getInstance().Translators("App.Loaded",apps));
-                server.AppList.put(apps,app);
+                Server.AppList.put(apps,app);
         }
     }
 }catch (FileNotFoundException fe){
@@ -87,6 +107,14 @@ catch (Exception e){
             return null;
         }
 
+    }
+
+    public void setDescription(Description des){
+        description = des;
+    }
+
+    public Description getDescription(){
+        return description;
     }
 
     protected String Translation(String key, Object... params){

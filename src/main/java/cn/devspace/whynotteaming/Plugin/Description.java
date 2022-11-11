@@ -12,6 +12,8 @@ public class Description {
     private String version;
     private String main;
     private String description;
+    private String dbName;
+    private String dbType;
 
     public Description(String YamlString) {
         Yaml yml = new Yaml();
@@ -30,7 +32,8 @@ public class Description {
             this.version = (String) map.get("Version");
             this.main = (String) map.get("Main");
             this.description = (String) map.get("Description");
-
+            this.dbName = (String) map.get("Database");
+            this.dbType = (String) map.get("DatabaseType");
         }
     }
 
@@ -52,6 +55,15 @@ public class Description {
 
     public String getMain() {
         return this.main;
+    }
+
+    public String getDbType(){
+        return this.dbType;
+    }
+
+
+    public String getDataBase(){
+        return this.dbName;
     }
 
 }

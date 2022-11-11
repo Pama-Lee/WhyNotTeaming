@@ -5,6 +5,7 @@ import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Manager.SettingManager;
 import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Plugin.AppBase;
+import cn.devspace.whynotteaming.Plugin.Description;
 import cn.devspace.whynotteaming.Plugin.PluginBase;
 import org.springframework.core.io.ClassPathResource;
 
@@ -38,9 +39,12 @@ public class Server extends ManagerBase {
     protected static Thread currentThread;
 
     public Map<String, PluginBase> pluginList;
-    public static Map<String, AppBase> AppList = new HashMap<>();
 
+
+    public static Map<String, AppBase> AppList = new HashMap<>();
     public static Map<String, AppBase> AppClass = new HashMap<>();
+
+
     private static Runtime runtime = Runtime.getRuntime();
 
     public Server() {
@@ -135,4 +139,5 @@ public class Server extends ManagerBase {
     public static String getName() {
         return NAME;
     }
+
 }
