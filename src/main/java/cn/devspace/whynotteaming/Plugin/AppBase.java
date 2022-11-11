@@ -2,20 +2,27 @@ package cn.devspace.whynotteaming.Plugin;
 
 
 import cn.devspace.whynotteaming.Lang.LangBase;
+import cn.devspace.whynotteaming.Manager.Annotation.Router;
+import cn.devspace.whynotteaming.Manager.AnnotationManager;
 import cn.devspace.whynotteaming.Manager.DataManager;
 import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Server.Server;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Map;
 
 
 import static cn.devspace.whynotteaming.Server.Server.RunPath;
 
+@RestController
 abstract public class AppBase extends ManagerBase {
 
     protected String callback = null;
@@ -75,6 +82,8 @@ try {
             String main = appDes.getMain();
                 Class<?> c = Class.forName(main);
                 AppBase app = (AppBase) c.getDeclaredConstructor().newInstance();
+                Map<String,String> maps = AnnotationManager.getRouterAnnotation(c);
+                Server.RouterList.put(apps,maps);
                 app.setDescription(appDes);
                 Log.AppStart(Server.getInstance().Translators("App.Start",apps));
                 app.localApp(apps);

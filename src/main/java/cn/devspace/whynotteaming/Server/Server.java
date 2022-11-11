@@ -5,7 +5,6 @@ import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Manager.SettingManager;
 import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Plugin.AppBase;
-import cn.devspace.whynotteaming.Plugin.Description;
 import cn.devspace.whynotteaming.Plugin.PluginBase;
 import org.springframework.core.io.ClassPathResource;
 
@@ -43,6 +42,7 @@ public class Server extends ManagerBase {
 
     public static Map<String, AppBase> AppList = new HashMap<>();
     public static Map<String, AppBase> AppClass = new HashMap<>();
+    public static Map<String, Map<String,String>> RouterList = new HashMap<>();
 
 
     private static Runtime runtime = Runtime.getRuntime();

@@ -1,6 +1,8 @@
 package cn.devspace.whynotteaming.App.Login;
 
 import cn.devspace.whynotteaming.Lang.LangBase;
+import cn.devspace.whynotteaming.Manager.Annotation.Router;
+import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Plugin.AppBase;
 
 import java.util.Map;
@@ -24,6 +26,17 @@ public class Login extends AppBase {
     public String onCall(String route, String method, Map<String,String> Req){
         sendLog("A visit From "+method+"\t"+Req.toString());
         return ResponseString(200,1,"A visit From "+method);
+    }
+
+    @Router("ming/mingming")
+    public String func(){
+        Log.sendLog("崇高了！");
+        return "hello!";
+    }
+
+    @Router("getLogin")
+    public void ming(){
+        sendLog("成功了！");
     }
 
 
