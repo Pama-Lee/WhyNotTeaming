@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 public class LangBase {
 
-    protected static Map<String, String> lang;
+    protected Map<String, String> lang;
 
     private String Language;
 
@@ -25,6 +25,13 @@ public class LangBase {
         this.Language = Language;
         lang = loadLangFile(Language);
     }
+
+    public LangBase(InputStream AppInputStream){
+        String Language = getLanguage();
+        this.Language = Language;
+        lang = loadLangFile(AppInputStream);
+    }
+
 
     public String getLanguage() {
         try {
@@ -40,10 +47,13 @@ public class LangBase {
         }
     }
 
-    public static String TranslateOne(String key, String... params) {
+    public String TranslateOne(String key, String... params) {
         return TranslateOne(key, Objects.requireNonNullElse(params, EmptyArrays.EMPTY_STRINGS), null);
     }
 
+    public String Translate(String key, String... params) {
+        return TranslateOne(key, Objects.requireNonNullElse(params, EmptyArrays.EMPTY_STRINGS), null);
+    }
     /**
      * 接收Object类型参数
      *
@@ -51,7 +61,7 @@ public class LangBase {
      * @param params
      * @return
      */
-    protected static String TranslateOne(String key, Object... params) {
+    protected String TranslateOne(String key, Object... params) {
         if (params != null) {
             String[] paramsToSting = new String[params.length];
             for (int i = 0; i < params.length; i++) {
@@ -61,6 +71,7 @@ public class LangBase {
         }
         return TranslateOne(key, EmptyArrays.EMPTY_STRINGS, null);
     }
+
 
     /**
      * 带单字符串性翻译
@@ -74,7 +85,7 @@ public class LangBase {
         return TranslateOne(key, new String[]{param}, null);
     }
 
-    public static String TranslateOne(String key, String[] params, String Level) {
+    public String TranslateOne(String key, String[] params, String Level) {
         String Text = getValue(key);
         if (Text == null){
             return null;
@@ -85,7 +96,7 @@ public class LangBase {
         return Text;
     }
 
-    protected static String Translation(String text, String Level) {
+    protected String Translation(String text, String Level) {
         StringBuilder newText = new StringBuilder();
         text = String.valueOf(text);
         String replaceString = null;
@@ -103,16 +114,16 @@ public class LangBase {
         return newText.toString();
     }
 
-    protected static String getValue(String key) {
-        if (lang != null && lang.get(key) != null) {
-            return lang.get(key);
+    protected String getValue(String key) {
+        if (this.lang != null && this.lang.get(key) != null) {
+            return this.lang.get(key);
         }
         return null;
     }
 
 
     public Map<String, String> getLang() {
-        return this.lang;
+        return lang;
     }
 
     private Map<String, String> loadLangFile(String Language) {
@@ -130,6 +141,24 @@ public class LangBase {
         }
 
     }
+
+    private Map<String, String> loadLangFile(InputStream LangInputStream) {
+
+        try{
+            InputStreamReader langStreamReader = new InputStreamReader(LangInputStream);
+            BufferedReader Reader = new BufferedReader(langStreamReader);
+            return parasLang(Reader);
+        } catch (IOException e) {
+            Log.sendError("The Language [" + Language + ".ini] File cannot open!", 778);
+            return null;
+        } catch (NullPointerException ne) {
+            Log.sendError("The Language [" + Language + "] Not Found! Please check your setting in [whynotteaming.yml]", 777);
+            return null;
+        }
+
+    }
+
+
 
     private Map<String, String> parasLang(BufferedReader reader) throws IOException {
         Map<String, String> res = new HashMap<>();

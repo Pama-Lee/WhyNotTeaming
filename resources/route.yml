@@ -1,0 +1,13 @@
+###路由配置
+###写法：
+###
+Test:
+  - 123123f
+  - 123123f
+
+Login:
+  - LoginBase
+  - Login
+
+Register:
+  - LoginMethod

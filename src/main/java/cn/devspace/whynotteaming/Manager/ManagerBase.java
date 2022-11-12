@@ -53,7 +53,7 @@ public class ManagerBase extends LangBase {
         return Map;
     }
 
-    public static String Translators(String key){
+    public String Translators(String key){
         return TranslateOne(key);
     }
 
@@ -69,7 +69,7 @@ public class ManagerBase extends LangBase {
         return path.replace("target/classes/", "");
     }
 
-    public static String Translators(String key,Object... params){
+    public String Translators(String key, Object... params){
         return TranslateOne(key,params);
     }
     public String getLangSet() {

@@ -9,19 +9,30 @@
 package cn.devspace.whynotteaming;
 
 
+import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Server.Server;
-import org.springframework.boot.SpringApplication;
+import cn.devspace.whynotteaming.Server.Thread.Console;
+import cn.devspace.whynotteaming.Server.Thread.WebServer;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
 public class WhyNotTeamingApplication {
     //入口类
     public static void main(String[] args) {
-        Server server = new Server();
-        server.Start();
+        try{
+            Server server = new Server();
+            server.Start();
+        }catch (Exception e){
+            Log.sendWarn(e.toString());
+        }
         //init
-        SpringApplication.run(WhyNotTeamingApplication.class, args);
+        WebServer webServer = new WebServer(args);
+        webServer.run();
 
+        Log.sendLog("测试");
+        Console console = new Console();
+        console.run();
     }
 
 }

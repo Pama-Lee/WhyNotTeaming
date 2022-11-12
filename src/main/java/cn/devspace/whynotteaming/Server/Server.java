@@ -1,6 +1,8 @@
 package cn.devspace.whynotteaming.Server;
 
 import cn.devspace.whynotteaming.Lang.LangBase;
+import cn.devspace.whynotteaming.Manager.Command.CommandBase;
+import cn.devspace.whynotteaming.Manager.Command.ConsoleManager;
 import cn.devspace.whynotteaming.Manager.ManagerBase;
 import cn.devspace.whynotteaming.Manager.SettingManager;
 import cn.devspace.whynotteaming.Message.Log;
@@ -11,6 +13,7 @@ import org.springframework.core.io.ClassPathResource;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -38,8 +41,15 @@ public class Server extends ManagerBase {
     protected static Thread currentThread;
 
     public Map<String, PluginBase> pluginList;
-    public Map<String, AppBase> AppList = new HashMap<>();
+
+
+    public static Map<String, AppBase> AppList = new HashMap<>();
     public static Map<String, AppBase> AppClass = new HashMap<>();
+    public static Map<String, Map<String,String>> RouterList = new HashMap<>();
+
+    public static Map<String, Map<CommandBase,Method>> CommandMap = new HashMap<>();
+
+
     private static Runtime runtime = Runtime.getRuntime();
 
     public Server() {
@@ -84,6 +94,16 @@ public class Server extends ManagerBase {
         AppBase.loadApps(this);
 
         Log.sendLog(TranslateOne("App.Run.UseMemory", getUsedMemory()));
+        enableApp();
+        ConsoleManager con = new ConsoleManager();
+        con.registerCommand();
+    }
+
+    private void enableApp(){
+        for(String app:this.AppList.keySet()){
+            AppBase appClass = this.AppList.get(app);
+            appClass.onEnable();
+        }
     }
 
 
@@ -125,4 +145,5 @@ public class Server extends ManagerBase {
     public static String getName() {
         return NAME;
     }
+
 }
