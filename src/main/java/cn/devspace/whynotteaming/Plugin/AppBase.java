@@ -22,7 +22,7 @@ import java.util.Map;
 
 import static cn.devspace.whynotteaming.Server.Server.RunPath;
 
-@RestController
+
 abstract public class AppBase extends ManagerBase {
 
     protected String callback = null;

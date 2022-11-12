@@ -7,13 +7,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-//路由注解
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Router {
-    @AliasFor(attribute = "URI")
+public @interface Commands {
+    @AliasFor(attribute = "Command")
     String value() default "";
 
     @AliasFor(attribute = "value")
-    String URI() default "";
+    String Command() default "";
 }
