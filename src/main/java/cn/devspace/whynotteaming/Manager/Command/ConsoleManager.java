@@ -1,17 +1,7 @@
 package cn.devspace.whynotteaming.Manager.Command;
 
-import cn.devspace.whynotteaming.Manager.Annotation.Commands;
-import cn.devspace.whynotteaming.Manager.AnnotationManager;
-import cn.devspace.whynotteaming.Message.Log;
-import cn.devspace.whynotteaming.Server.Server;
-
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
-public class ConsoleManager implements CommandBase{
-
+public class ConsoleManager implements CommandBase {
+/*
     @Commands(Command = "help")
     public String help(String[] args){
         Log.sendLog("这是Help命令!");
@@ -38,5 +28,5 @@ public class ConsoleManager implements CommandBase{
         }
 
     }
-
+*/
 }

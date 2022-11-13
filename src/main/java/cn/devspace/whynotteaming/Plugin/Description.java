@@ -57,12 +57,12 @@ public class Description {
         return this.main;
     }
 
-    public String getDbType(){
+    public String getDbType() {
         return this.dbType;
     }
 
 
-    public String getDataBase(){
+    public String getDataBase() {
         return this.dbName;
     }
 

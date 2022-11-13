@@ -30,7 +30,7 @@ public class Server extends ManagerBase {
     public final URL ROOT = this.getClass().getResource("/");
     public String classPath = new File(this.getClass().getResource("").getPath()).getPath() + "/";
     public String AppPath = classPath.replace("Server", "App") + "/";
-    public static String RunPath = System.getProperty("user.dir")+"/";
+    public static String RunPath = System.getProperty("user.dir") + "/";
     public LangBase lang;
     public SettingManager settingManager;
 
@@ -45,9 +45,9 @@ public class Server extends ManagerBase {
 
     public static Map<String, AppBase> AppList = new HashMap<>();
     public static Map<String, AppBase> AppClass = new HashMap<>();
-    public static Map<String, Map<String,String>> RouterList = new HashMap<>();
+    public static Map<String, Map<String, String>> RouterList = new HashMap<>();
 
-    public static Map<String, Map<CommandBase,Method>> CommandMap = new HashMap<>();
+    public static Map<String, Map<CommandBase, Method>> CommandMap = new HashMap<>();
 
 
     private static Runtime runtime = Runtime.getRuntime();
@@ -96,13 +96,19 @@ public class Server extends ManagerBase {
         Log.sendLog(TranslateOne("App.Run.UseMemory", getUsedMemory()));
         enableApp();
         ConsoleManager con = new ConsoleManager();
-        con.registerCommand();
     }
 
-    private void enableApp(){
-        for(String app:this.AppList.keySet()){
+    private void enableApp() {
+        for (String app : this.AppList.keySet()) {
             AppBase appClass = this.AppList.get(app);
             appClass.onEnable();
+        }
+    }
+
+    public static void Enabled(){
+        for (String app : AppList.keySet()) {
+            AppBase appClass = AppList.get(app);
+            appClass.onEnabled();
         }
     }
 

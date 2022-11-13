@@ -14,12 +14,12 @@ public class Register extends AppBase {
 
     @Override
     public String onCall(String route, String method, Map<String, String> Request) {
-        sendLog("有人来了:"+Request.toString());
+        sendLog("有人来了:" + Request.toString());
         return Request.toString();
     }
 
     @Router("reg")
-    public String reg(){
+    public String reg() {
         return "欢迎注册!";
     }
 }

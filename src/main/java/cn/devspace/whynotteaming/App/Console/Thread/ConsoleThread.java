@@ -1,12 +1,13 @@
-package cn.devspace.whynotteaming.Server.Thread;
+package cn.devspace.whynotteaming.App.Console.Thread;
 
 import cn.devspace.whynotteaming.Manager.Command.CommandManager;
-import cn.devspace.whynotteaming.Manager.Command.ConsoleManager;
 import cn.devspace.whynotteaming.Message.Log;
 
 import java.util.Scanner;
 
-public class Console implements Runnable{
+import static cn.devspace.whynotteaming.Message.Log.sendLog;
+
+public class ConsoleThread extends Thread {
 
 
     /**
@@ -14,11 +15,11 @@ public class Console implements Runnable{
      */
     @Override
     public void run() {
-        Log.sendLog("send:");
-        while (true){
+        sendLog("send:");
+        while (true) {
             Scanner scanner = new Scanner(System.in);
             // 读取整行
-            String command= scanner.nextLine();
+            String command = scanner.nextLine();
             CommandManager.ConsoleSupport(command);
         }
     }

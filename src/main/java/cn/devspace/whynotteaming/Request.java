@@ -2,7 +2,8 @@ package cn.devspace.whynotteaming;
 
 import cn.devspace.whynotteaming.Message.Log;
 import cn.devspace.whynotteaming.Server.Server;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,25 +12,25 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
 
+
 @RestController
 public class Request extends HttpServlet {
     @GetMapping("**")
-    public String Router(HttpServletRequest request)
-    {
-        Map<String,Map<String,String>> router = Server.RouterList;
-        Set<String> map= router.keySet();
-        for (String app:map){
-            for (String method:router.get(app).keySet()){
-                Map<String,String> AppRouters = router.get(app);
+    public String Router(HttpServletRequest request) {
+        Map<String, Map<String, String>> router = Server.RouterList;
+        Set<String> map = router.keySet();
+        for (String app : map) {
+            for (String method : router.get(app).keySet()) {
+                Map<String, String> AppRouters = router.get(app);
                 String ReqURI = request.getRequestURI();
-                if (ReqURI.equals("/"+app+"/"+AppRouters.get(method))){
+                if (ReqURI.equals("/" + app + "/" + AppRouters.get(method))) {
                     try {
                         Method methods = Server.AppList.get(app).getClass().getMethod(method);
                         Object doMethod = Server.AppList.get(app);
                         Object m = methods.invoke(doMethod);
-                        if (m!=null){
-                         return m.toString();
-                        }else {
+                        if (m != null) {
+                            return m.toString();
+                        } else {
                             return null;
                         }
                     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
@@ -38,7 +39,8 @@ public class Request extends HttpServlet {
                 }
             }
         }
-        return "404";    }
+        return "404";
+    }
 
 /*
     @GetMapping("/{route}/{method}")

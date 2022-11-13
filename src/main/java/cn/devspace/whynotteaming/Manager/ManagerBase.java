@@ -41,7 +41,8 @@ public class ManagerBase extends LangBase {
         Map<String, String> Map = yaml.loadAs(bf, Map.class);
         return Map;
     }
-    public static Map<String, ArrayList<String>> getSingeYaml(String Path,boolean ArrayList) {
+
+    public static Map<String, ArrayList<String>> getSingeYaml(String Path, boolean ArrayList) {
         Yaml yaml = new Yaml();
         BufferedReader bf = null;
         try {
@@ -53,7 +54,7 @@ public class ManagerBase extends LangBase {
         return Map;
     }
 
-    public String Translators(String key){
+    public String Translators(String key) {
         return TranslateOne(key);
     }
 
@@ -69,9 +70,10 @@ public class ManagerBase extends LangBase {
         return path.replace("target/classes/", "");
     }
 
-    public String Translators(String key, Object... params){
-        return TranslateOne(key,params);
+    public String Translators(String key, Object... params) {
+        return TranslateOne(key, params);
     }
+
     public String getLangSet() {
         return getSingeYaml(this.getClass().getResource("/whynotteaming.yml").getPath().substring(1)).get("app.language");
     }

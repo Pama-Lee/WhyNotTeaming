@@ -2,8 +2,6 @@ package cn.devspace.whynotteaming.Message;
 
 import cn.devspace.whynotteaming.Server.Server;
 
-import java.util.Date;
-
 public class Log extends MessageBase {
 
     private static String plugin = null;
@@ -16,9 +14,9 @@ public class Log extends MessageBase {
         System.out.print(BaseFormat(METHOD_LOG, Message));
     }
 
-    public static void sendAppMessage(String App,String Message){
+    public static void sendAppMessage(String App, String Message) {
         plugin = App;
-        System.out.print(BaseFormat(METHOD_APPMESSAGE,Message));
+        System.out.print(BaseFormat(METHOD_APPMESSAGE, Message));
     }
 
     public static void sendWarn(String Message) {
@@ -39,10 +37,10 @@ public class Log extends MessageBase {
 
             default -> null;
         };
-        if (METHOD.equals("APPMESSAGE")){
-            Prefix = Format("[<"+plugin+">]", YELLOW_COLOR);
+        if (METHOD.equals("APPMESSAGE")) {
+            Prefix = Format("[<" + plugin + ">]", YELLOW_COLOR);
         }
-        return Format(getTime(), PINK_COLOR)+"->"+Prefix + "\t" + Format(Message, WHITE_COLOR) + "\n";
+        return Format(getTime(), PINK_COLOR) + "->" + Prefix + "\t" + Format(Message, WHITE_COLOR) + "\n";
 
     }
 }

@@ -9,7 +9,7 @@ public class WebServer implements Runnable {
 
     private String[] args;
 
-    public WebServer(String[] args){
+    public WebServer(String[] args) {
         this.args = args;
     }
 

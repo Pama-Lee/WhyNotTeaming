@@ -56,8 +56,8 @@ public class MessageBase implements Message {
         return Format.toString();
     }
 
-    public static String getTime(){
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'_'HH:mm:ss");
+    public static String getTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'_'HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         return formatter.format(date);
     }

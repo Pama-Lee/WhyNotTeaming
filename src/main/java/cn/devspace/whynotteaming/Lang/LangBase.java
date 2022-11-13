@@ -26,7 +26,7 @@ public class LangBase {
         lang = loadLangFile(Language);
     }
 
-    public LangBase(InputStream AppInputStream){
+    public LangBase(InputStream AppInputStream) {
         String Language = getLanguage();
         this.Language = Language;
         lang = loadLangFile(AppInputStream);
@@ -54,6 +54,7 @@ public class LangBase {
     public String Translate(String key, String... params) {
         return TranslateOne(key, Objects.requireNonNullElse(params, EmptyArrays.EMPTY_STRINGS), null);
     }
+
     /**
      * 接收Object类型参数
      *
@@ -87,7 +88,7 @@ public class LangBase {
 
     public String TranslateOne(String key, String[] params, String Level) {
         String Text = getValue(key);
-        if (Text == null){
+        if (Text == null) {
             return null;
         }
         for (int i = 0; i < params.length; i++) {
@@ -144,7 +145,7 @@ public class LangBase {
 
     private Map<String, String> loadLangFile(InputStream LangInputStream) {
 
-        try{
+        try {
             InputStreamReader langStreamReader = new InputStreamReader(LangInputStream);
             BufferedReader Reader = new BufferedReader(langStreamReader);
             return parasLang(Reader);
@@ -159,7 +160,6 @@ public class LangBase {
     }
 
 
-
     private Map<String, String> parasLang(BufferedReader reader) throws IOException {
         Map<String, String> res = new HashMap<>();
         String Line;
@@ -172,8 +172,8 @@ public class LangBase {
             if (r.length < 2) {
                 continue;
             }
-            String key = r[0].replace(" ","");
-            String value = r[1].replace("\"","");
+            String key = r[0].replace(" ", "");
+            String value = r[1].replace("\"", "");
             if (value.length() > 1 && value.charAt(0) == '"' && value.charAt(value.length() - 1) == '"') {
                 value = value.substring(1, value.length() - 1).replace("\\\"", "\"").replace("\\\\", "\\");
             }

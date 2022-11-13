@@ -1,6 +1,6 @@
 package cn.devspace.whynotteaming.Server.Thread;
 
-public class AppThread implements Runnable{
+public class AppThread implements Runnable {
     /**
      * Runs this operation.
      */

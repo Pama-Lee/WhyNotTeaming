@@ -6,4 +6,4 @@ app.language: chs
 EnableApp:
   - Login
   - Register
-  - whyni
+  - Console

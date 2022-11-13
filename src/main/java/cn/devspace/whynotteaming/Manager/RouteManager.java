@@ -2,11 +2,7 @@ package cn.devspace.whynotteaming.Manager;
 
 
 import cn.devspace.whynotteaming.Message.Log;
-import org.yaml.snakeyaml.Yaml;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,18 +19,19 @@ public class RouteManager extends ManagerBase {
         ALLOW_ROUTE = loadRoute();
     }
 
-    public Map<String,ArrayList<String>> loadRoute(){
+    public Map<String, ArrayList<String>> loadRoute() {
         try {
-            return getSingeYaml(System.getProperty("user.dir")+"/resources/route.yml",true);
-        }catch (Exception fn){
-            Log.sendError(fn.toString(),3);
+            return getSingeYaml(System.getProperty("user.dir") + "/resources/route.yml", true);
+        } catch (Exception fn) {
+            Log.sendError(fn.toString(), 3);
             return null;
         }
     }
 
-    public Map<String,ArrayList<String>> getRouteMap(){
+    public Map<String, ArrayList<String>> getRouteMap() {
         return ALLOW_ROUTE;
     }
+
     public String getLanguage() {
         return new SettingManager().getSetting("app.language");
     }
