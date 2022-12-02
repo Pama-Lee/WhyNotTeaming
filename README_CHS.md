@@ -29,7 +29,7 @@
 
 #### 「APP」由两部分组成：
 
-- 位于核心源码中cn.devspace.whynotteaming.App中的主类与其他定义的其他类
+- 位于核心源码中cn.devspace.cn.pamalee.whynotteaming.App中的主类与其他定义的其他类
 - 位于资源文件[resources]中的app文件夹内各「APP」的配置Yaml文件
 
 #### 【规划中】「Plugin」原则上是一个打包好的.jar文件,其中包含
