@@ -1,0 +1,6 @@
+Name: WhyNotTeaming
+Author: Pama Lee
+Version: 1.0.0
+Main: cn.pamalee.whynotteaming.main
+Description: 一个简易的项目管理
+Route: wnt

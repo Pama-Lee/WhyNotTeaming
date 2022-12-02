@@ -34,7 +34,7 @@ What is being planned is that the project will start SpringBoot service, get the
 
 #### "APP" consists of two parts.
 
-- The main class located in the core source code in cn.devspace.whynotteaming.App and other defined classes
+- The main class located in the core source code in cn.devspace.cn.pamalee.whynotteaming.App and other defined classes
 - The configuration Yaml file of each "APP" in the app folder located in the resources file [resources].
 
 #### [Planning] "Plugin" is in principle a packaged .jar file, which contains
